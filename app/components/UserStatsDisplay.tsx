@@ -10,8 +10,8 @@ export default function UserStatsDisplay({
   userData,
 }: UserStatsProps) {
   return (
-    <div>
-      <h2>{userName}&apos;s Stats</h2>
+    <div className="mt-4">
+      <h2 className="text-xl font-bold">{userName}&apos;s Stats</h2>
       <p>Total Repositories: {userData.totalCount}</p>
       <p>Total Forks: {userData.totalForks}</p>
       <p>Languages:</p>
