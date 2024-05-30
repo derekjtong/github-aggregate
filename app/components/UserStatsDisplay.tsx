@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { LuExternalLink } from "react-icons/lu";
 import { UserRepoStats, UserStats } from "../types";
 import PieChart from "./PieChart";
 
@@ -12,7 +14,16 @@ export default function UserStatsDisplay({
 }: UserStatsProps) {
   return (
     <div className="mt-4">
-      <h2 className="text-xl font-bold">{userData.login}&apos;s Stats</h2>
+      <h2 className="text-2xl font-bold">
+        <Link
+          href={userData.html_url}
+          target="_blank"
+          className="text-blue-500 hover:underline flex items-center"
+        >
+          <div>{userData.login}&apos;s Stats</div>
+          <LuExternalLink />
+        </Link>
+      </h2>
       <p>Total Repositories: {userRepoData.totalCount}</p>
       <p>Total Forks: {userRepoData.totalForks}</p>
       <p>Languages:</p>
