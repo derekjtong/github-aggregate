@@ -4,10 +4,10 @@ import axios from "axios";
 import { FormEvent, useState } from "react";
 import InputForm from "./components/InputForm";
 import UserStatsDisplay from "./components/UserStatsDisplay";
-import { UserStats } from "./types";
+import { UserRepoStats } from "./types";
 
 export default function Home() {
-  const [userData, setUserData] = useState<UserStats | null>();
+  const [userData, setUserData] = useState<UserRepoStats | null>();
   const [userName, setUserName] = useState(""); // Username entered by the user, connected to input field
   const [displayUserName, setDisplayUserName] = useState(""); // Username of the user whose data is currently being displayed
   const [error, setError] = useState("");
@@ -28,7 +28,7 @@ export default function Home() {
     try {
       const response = await axios.get(`/api/user/${userName}/repos/stats`);
 
-      const data: UserStats = response.data;
+      const data: UserRepoStats = response.data;
       setUserData(data);
       setDisplayUserName(userName);
     } catch (error: any) {
