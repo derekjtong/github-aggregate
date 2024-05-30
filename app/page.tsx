@@ -8,8 +8,8 @@ import { UserStats } from "./types";
 
 export default function Home() {
   const [userData, setUserData] = useState<UserStats | null>();
-  const [userName, setUserName] = useState("");
-  const [displayUserName, setDisplayUserName] = useState("");
+  const [userName, setUserName] = useState(""); // Name entered by the user, connected to input field
+  const [displayUserName, setDisplayUserName] = useState(""); // Name of the user to display stats for
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
