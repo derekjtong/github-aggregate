@@ -42,6 +42,7 @@ test("displays error when username is not provided", async () => {
   });
 });
 
+// Currently not working because user display renders when userData and userRepoData is both present, need to mock both
 test("fetches and displays user stats", async () => {
   render(<Home />);
   mockedAxios.get.mockResolvedValueOnce({ data: mockUserStats });
