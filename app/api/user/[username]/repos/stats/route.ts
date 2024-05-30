@@ -31,6 +31,23 @@ export async function GET(request: Request, { params }: { params: IParams }) {
     });
 
     const repos: Repo[] = res.data;
+    let page = 1;
+    let fetchedRepos: Repo[] = [];
+
+    do {
+      const res = await octokit.request(`GET /users/${username}/repos`, {
+        headers: {
+          "X-GitHub-Api-Version": "2022-11-28",
+          accept: "application/vnd.github+json",
+        },
+        per_page: 100,
+        page,
+      });
+
+      fetchedRepos = res.data;
+      repos.push(...fetchedRepos);
+      page++;
+    } while (fetchedRepos.length > 0);
 
     const totalCount = repos.length;
     const totalForks = repos.reduce(
