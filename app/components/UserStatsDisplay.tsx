@@ -20,7 +20,7 @@ export default function UserStatsDisplay({
           target="_blank"
           className="text-blue-500 hover:underline flex items-center"
         >
-          <div>{userData.login}&apos;s Stats</div>
+          <div className="mr-2">{userData.login}&apos;s Stats</div>
           <LuExternalLink />
         </Link>
       </h2>
