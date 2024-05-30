@@ -8,7 +8,7 @@ interface IParams {
 export async function GET(request: Request, { params }: { params: IParams }) {
   try {
     const { username } = params;
-    const octokit = new Octokit({});
+    const octokit = new Octokit();
 
     const res = await octokit.request(`GET /users/${username}/repos`, {
       headers: {
