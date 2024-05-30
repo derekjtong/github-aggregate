@@ -64,7 +64,10 @@ export async function GET(request: Request, { params }: { params: IParams }) {
     };
 
     return NextResponse.json(responseData);
-  } catch (err) {
+  } catch (err: any) {
+    if (err.status === 404) {
+      return new NextResponse("User not found", { status: 404 });
+    }
     console.error("Error fetching repos:", err);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
