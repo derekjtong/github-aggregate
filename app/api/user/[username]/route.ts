@@ -5,6 +5,7 @@ interface IParams {
   username: string;
 }
 
+// Retrieves user details for a given username
 export async function GET(request: Request, { params }: { params: IParams }) {
   try {
     const { username } = params;
