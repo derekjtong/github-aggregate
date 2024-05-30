@@ -13,7 +13,19 @@ interface Repo {
 export async function GET(request: Request, { params }: { params: IParams }) {
   try {
     const { username } = params;
-    const octokit = new Octokit();
+
+    if (
+      process.env.GITHUB_TOKEN == "" &&
+      process.env.NODE_ENV !== "production"
+    ) {
+      console.log(
+        "No GITHUB_TOKEN env variable set! Limited requests per hour."
+      );
+    }
+
+    const octokit = new Octokit({
+      auth: process.env.GITHUB_TOKEN || "",
+    });
 
     const res = await octokit.request(`GET /users/${username}/repos`, {
       headers: {
