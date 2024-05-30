@@ -9,6 +9,7 @@ import { UserStats } from "./types";
 export default function Home() {
   const [userData, setUserData] = useState<UserStats | null>();
   const [userName, setUserName] = useState("");
+  const [displayUserName, setDisplayUserName] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,6 +30,7 @@ export default function Home() {
 
       const data: UserStats = response.data;
       setUserData(data);
+      setDisplayUserName(userName);
     } catch (error: any) {
       if (error.response && error.response.status === 404) {
         setError("User not found");
@@ -51,7 +53,9 @@ export default function Home() {
         error={error}
         isLoading={isLoading}
       />
-      {userData && <UserStatsDisplay userName={userName} userData={userData} />}
+      {userData && (
+        <UserStatsDisplay userName={displayUserName} userData={userData} />
+      )}
     </div>
   );
 }
