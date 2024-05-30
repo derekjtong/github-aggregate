@@ -1,4 +1,5 @@
 import { UserRepoStats, UserStats } from "../types";
+import PieChart from "./PieChart";
 
 interface UserStatsProps {
   userData: UserStats;
@@ -15,13 +16,14 @@ export default function UserStatsDisplay({
       <p>Total Repositories: {userRepoData.totalCount}</p>
       <p>Total Forks: {userRepoData.totalForks}</p>
       <p>Languages:</p>
-      <ul>
+      {/* <ul>
         {Object.entries(userRepoData.languages).map(([language, count]) => (
           <li key={language}>
             {language}: {count}
           </li>
         ))}
-      </ul>
+      </ul> */}
+      <PieChart userRepoData={userRepoData} />
     </div>
   );
 }
