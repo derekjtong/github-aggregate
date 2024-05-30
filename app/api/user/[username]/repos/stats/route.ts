@@ -1,4 +1,4 @@
-import { LanguageCount, Repo, UserStats } from "@/app/types";
+import { LanguageCount, Repo, UserRepoStats } from "@/app/types";
 import { NextResponse } from "next/server";
 import { Octokit } from "octokit";
 
@@ -74,7 +74,7 @@ export async function GET(request: Request, { params }: { params: IParams }) {
       Object.entries(languageCount).sort((a, b) => b[1] - a[1])
     );
 
-    const responseData: UserStats = {
+    const responseData: UserRepoStats = {
       totalCount,
       totalForks,
       languages: sortedLanguagesCount,

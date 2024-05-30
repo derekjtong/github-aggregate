@@ -7,7 +7,7 @@ export interface LanguageCount {
   [key: string]: number;
 }
 
-export interface UserStats {
+export interface UserRepoStats {
   totalCount: number;
   totalForks: number;
   languages: LanguageCount;
