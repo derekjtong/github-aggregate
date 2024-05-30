@@ -4,19 +4,19 @@ import axios from "axios";
 import { FormEvent, useState } from "react";
 import InputForm from "./components/InputForm";
 import UserStatsDisplay from "./components/UserStatsDisplay";
-import { UserRepoStats } from "./types";
+import { UserRepoStats, UserStats } from "./types";
 
 export default function Home() {
-  const [userData, setUserData] = useState<UserRepoStats | null>();
+  const [userRepoData, setUserRepoData] = useState<UserRepoStats | null>();
+  const [userData, setUserData] = useState<UserStats | null>();
   const [userName, setUserName] = useState(""); // Username entered by the user, connected to input field
-  const [displayUserName, setDisplayUserName] = useState(""); // Username of the user whose data is currently being displayed
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
-    setUserData(null);
+    setUserRepoData(null);
     setIsLoading(true);
 
     if (userName === "") {
@@ -26,11 +26,13 @@ export default function Home() {
     }
 
     try {
-      const response = await axios.get(`/api/user/${userName}/repos/stats`);
+      const userRepoResponse = await axios.get(
+        `/api/user/${userName}/repos/stats`
+      );
+      const userDataResponse = await axios.get(`/api/user/${userName}`);
 
-      const data: UserRepoStats = response.data;
-      setUserData(data);
-      setDisplayUserName(userName);
+      setUserRepoData(userRepoResponse.data);
+      setUserData(userDataResponse.data);
     } catch (error: any) {
       if (error.response && error.response.status === 404) {
         setError("User not found");
@@ -53,8 +55,8 @@ export default function Home() {
         error={error}
         isLoading={isLoading}
       />
-      {userData && (
-        <UserStatsDisplay userName={displayUserName} userData={userData} />
+      {userRepoData && userData && (
+        <UserStatsDisplay userData={userData} userRepoData={userRepoData} />
       )}
     </div>
   );
