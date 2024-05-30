@@ -24,14 +24,7 @@ export async function GET(request: Request, { params }: { params: IParams }) {
       auth: process.env.GITHUB_TOKEN || "",
     });
 
-    const res = await octokit.request(`GET /users/${username}/repos`, {
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-        accept: "application/vnd.github+json",
-      },
-    });
-
-    const repos: Repo[] = res.data;
+    const repos: Repo[] = [];
     let page = 1;
     let fetchedRepos: Repo[] = [];
 
@@ -80,6 +73,17 @@ export async function GET(request: Request, { params }: { params: IParams }) {
       totalForks,
       languages: sortedLanguagesCount,
     };
+
+    // const response = NextResponse.json(responseData);
+
+    // // Set Cache-Control headers for caching at Vercel's Edge Network
+    // response.headers.set(
+    //   "Cache-Control",
+    //   "public, s-maxage=3600, stale-while-revalidate=59"
+    // );
+    // response.headers.set("Vercel-CDN-Cache-Control", "max-age=3600");
+
+    // return response;
 
     return NextResponse.json(responseData);
   } catch (err: any) {
