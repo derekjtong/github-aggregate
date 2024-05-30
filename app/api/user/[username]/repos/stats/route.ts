@@ -1,13 +1,9 @@
+import { LanguageCount, Repo, UserStats } from "@/app/types";
 import { NextResponse } from "next/server";
 import { Octokit } from "octokit";
 
 interface IParams {
   username: string;
-}
-
-interface Repo {
-  forks_count: number;
-  language: string | null;
 }
 
 export async function GET(request: Request, { params }: { params: IParams }) {
@@ -42,7 +38,7 @@ export async function GET(request: Request, { params }: { params: IParams }) {
       0
     );
 
-    const languageCount: { [key: string]: number } = {};
+    const languageCount: LanguageCount = {};
     repos.forEach((repo: Repo) => {
       if (repo.language) {
         if (languageCount[repo.language]) {
@@ -57,11 +53,11 @@ export async function GET(request: Request, { params }: { params: IParams }) {
     // if a1 < b1 then positive; b before a
     // if a1 > b1 then negative; a before b
     // if a1 == b1 then 0; no change
-    const sortedLanguagesCount = Object.fromEntries(
+    const sortedLanguagesCount: LanguageCount = Object.fromEntries(
       Object.entries(languageCount).sort((a, b) => b[1] - a[1])
     );
 
-    const responseData = {
+    const responseData: UserStats = {
       totalCount,
       totalForks,
       languages: sortedLanguagesCount,
