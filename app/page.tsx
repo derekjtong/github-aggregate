@@ -49,9 +49,8 @@ export default function Home() {
         setUserName={setUserName}
         handleSubmit={handleSubmit}
         error={error}
+        isLoading={isLoading}
       />
-      {error && <div className="text-red-500">{error}</div>}
-      {isLoading && <div>Loading...</div>}
       {userData && <UserStatsDisplay userName={userName} userData={userData} />}
     </div>
   );
