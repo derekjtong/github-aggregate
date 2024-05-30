@@ -28,7 +28,7 @@ const mockUserStats = {
 
 test("renders Home component", () => {
   render(<Home />);
-  expect(screen.getByText("Home")).toBeDefined();
+  expect(screen.getByText("GitHub User Repo Statistics")).toBeDefined();
   expect(screen.getByText("User Name:")).toBeDefined();
 });
 

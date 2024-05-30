@@ -45,7 +45,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div>Home</div>
+      <h1 className="text-3xl p-5">GitHub User Repo Statistics</h1>
       <InputForm
         userName={userName}
         setUserName={setUserName}
