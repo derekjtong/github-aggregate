@@ -24,14 +24,7 @@ export async function GET(request: Request, { params }: { params: IParams }) {
       auth: process.env.GITHUB_TOKEN || "",
     });
 
-    const res = await octokit.request(`GET /users/${username}/repos`, {
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-        accept: "application/vnd.github+json",
-      },
-    });
-
-    const repos: Repo[] = res.data;
+    const repos: Repo[] = [];
     let page = 1;
     let fetchedRepos: Repo[] = [];
 
