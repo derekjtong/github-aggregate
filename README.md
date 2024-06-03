@@ -32,5 +32,5 @@ Optional
 
 ## API Endpoints
 
-* `/api/user/[username]/[repos]/stats`: fetches repository statistics for the given username
+* `/api/user/[username]/repos/stats`: fetches repository statistics for the given username
 * `/api/user/[username]`: fetches user information for the given username
